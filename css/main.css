@@ -1090,7 +1090,10 @@ pre .javascript .function {
   bottom: 19px;
 }
 .header {
-  background: transparent;
+  background: url("https://img.zcool.cn/community/0151645c626cdda801203d22648880.jpg@1280w_1l_2o_100sh.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
 }
 .header-inner {
   position: relative;
@@ -1822,7 +1825,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #a6b601;
+  background: #40d69e;
 }
 .links-of-blogroll {
   font-size: 13px;
