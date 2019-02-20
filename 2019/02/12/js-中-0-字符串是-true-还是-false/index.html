@@ -88,7 +88,7 @@
 <meta property="og:description" content="今天做项目的时候发现后台返回的值是 0 字符串，用这个值来做 if 判断，结果居然通过了。于是做了如下测试，结果一脸蒙圈  于是翻了一下基础知识。  首先来看 if(a) 这个判断。在 if 语句里面，判断条件会自动条用 Boolean() 转换函数将判断条件转换成一个布尔值。也就是说 0 字符串调用 Boolean() 的结果是 true 。为什么呢？我们来看 Boolean() 的转换规则：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://a3.qpic.cn/psb?/V10QgET04EGzPq/6*paoRNO6CHouVHqdGqmjIC4rJdwSVaEu.*gwpZzZLc!/b/dL4AAAAAAAAA&ek=1&kp=1&pt=0&bo=SQGfAAAAAAADF.U!&tl=1&vuin=3190378245&tm=1548925200&sce=60-2-2&rf=viewer_4">
-<meta property="og:updated_time" content="2019-02-12T07:26:23.000Z">
+<meta property="og:updated_time" content="2019-02-20T09:14:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js 中 0 字符串是 true 还是 false">
 <meta name="twitter:description" content="今天做项目的时候发现后台返回的值是 0 字符串，用这个值来做 if 判断，结果居然通过了。于是做了如下测试，结果一脸蒙圈  于是翻了一下基础知识。  首先来看 if(a) 这个判断。在 if 语句里面，判断条件会自动条用 Boolean() 转换函数将判断条件转换成一个布尔值。也就是说 0 字符串调用 Boolean() 的结果是 true 。为什么呢？我们来看 Boolean() 的转换规则：">
@@ -366,7 +366,9 @@
 </table>
 <p>0 字符串属于非空字符串，结果自然就是 true；</p>
 <ol start="2">
-<li>再看 if(a == false) 的情况；这就要看 == 运算符的比较规则了。<br> 1) 如果一个操作数是布尔值，先将其转换为数值；<br> 2) 如果一个操作数是字符串，先将其转换为数值；<br> 3) 如果一个操作数是对象，先调用 valueOf() 方法得到基本类型，再进行比较<br> 4) null 和 undefined 相等；<br> 5) 如果有一个操作数是NaN，则返回false；<br> 6) 如果两个操作数都是对象，看他们是否指向同一个对象；</li>
+<li><p>再看 if(a == false) 的情况；这就要看 == 运算符的比较规则了。相等运算符，在比较时会先转换操作数，然后在比较他们的相等性，转换的基本规则如下：<br> 1) 如果一个操作数是布尔值，先将其转换为数值；<br> 2) 如果一个操作数是字符串，另一个是数值，先将其转换为数值；<br> 3) 如果一个操作数是对象，另一个不是，先调用 valueOf() 方法得到基本类型，再进行比较；</p>
+<p> 比较时遵循以下原则：<br> 1) null 和 undefined 相等；<br> 2) 如果有一个操作数是NaN，则返回false；<br> 3) 如果两个操作数都是对象，看他们是否指向同一个对象；<br> 4）在比较之前，不能将 null 和 undefined 转换成其他任何值。</p>
+</li>
 </ol>
 <p>在这个例子中，a 是字符串，false 是布尔值，都需要转换成数值，转换后都是 0，所以结果也是 true；</p>
 
