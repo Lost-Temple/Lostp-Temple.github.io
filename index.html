@@ -346,7 +346,19 @@
       
         
           
-            
+            <p>这次做 app 的推送功能，用的是阿里云的推动。github 上找到了 react-native-aliyun-push 这个组件，看了一下功能都能满足。根据文档，很快就完成了接入。基本没有什么问题。需要注意的大概有三点。</p>
+<ol>
+<li>iOS 上 deviceToken 注册失败，返回 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Code=3000 &quot;未找到应用程序的“aps-environment”的授权字符串&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这是 Xcode 里面有一个开关没打开造成的，如图<img src="https://s2.ax1x.com/2019/02/27/kTPn1A.jpg" alt="image"></p>
+<ol start="2">
+<li><p>iOS 上如果应用同时继承了支付宝支付，可能会报 UTDID 冲突，可以去支付宝平台 下载新的 SDK ，如图<img src="https://s2.ax1x.com/2019/02/27/kTPhB6.png" alt="image"></p>
+</li>
+<li><p>Android8.0 以上设备需要配置 notificationChannel ，前端和后台要配置相同的 notificationChannel，阿里云移动推送的官方文档有提到，但是容易被忽略。如果发现 Android 设备收到消息有数据打印，但是没有弹出通知，有可能就是没有配置 notificatinoChannel ，也可能是后台推送的 type 是 message 而不是 notification。</p>
+</li>
+</ol>
+
           
         
       
@@ -488,7 +500,7 @@
         
           
             <p>今天做项目的时候发现后台返回的值是 0 字符串，用这个值来做 if 判断，结果居然通过了。于是做了如下测试，结果一脸蒙圈</p>
-<p><img src="http://a3.qpic.cn/psb?/V10QgET04EGzPq/6*paoRNO6CHouVHqdGqmjIC4rJdwSVaEu.*gwpZzZLc!/b/dL4AAAAAAAAA&amp;ek=1&amp;kp=1&amp;pt=0&amp;bo=SQGfAAAAAAADF.U!&amp;tl=1&amp;vuin=3190378245&amp;tm=1548925200&amp;sce=60-2-2&amp;rf=viewer_4" alt="images"></p>
+<p><img src="https://s2.ax1x.com/2019/02/27/kTF1Jg.png" alt="images"></p>
 <p>于是翻了一下基础知识。</p>
 <ol>
 <li>首先来看 if(a) 这个判断。在 if 语句里面，判断条件会自动条用 Boolean() 转换函数将判断条件转换成一个布尔值。也就是说 0 字符串调用 Boolean() 的结果是 true 。为什么呢？我们来看 Boolean() 的转换规则：</li>
@@ -630,7 +642,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
