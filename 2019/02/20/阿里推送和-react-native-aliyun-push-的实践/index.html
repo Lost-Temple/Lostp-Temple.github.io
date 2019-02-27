@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="这次做 app 的推送功能，用的是阿里云的推动。github 上找到了 react-native-aliyun-push 这个组件，看了一下功能都能满足。根据文档，很快就完成了接入。基本没有什么问题。需要注意的大概有三点。  iOS 上 deviceToken 注册失败，返回 1Code=3000 &amp;quot;未找到应用程序的“aps-environment”的授权字符串&amp;quot;   这是 X">
+<meta name="description" content="这次做 app 的推送功能，用的是阿里云的推动。github 上找到了 react-native-aliyun-push 这个组件，看了一下功能都能满足。根据文档，很快就完成了接入。基本没有什么问题。需要注意的大概有四点。  iOS 上 deviceToken 注册失败，返回 1Code=3000 &amp;quot;未找到应用程序的“aps-environment”的授权字符串&amp;quot;   这是 X">
 <meta name="keywords" content="react-native">
 <meta property="og:type" content="article">
 <meta property="og:title" content="阿里推送和 react-native-aliyun-push 的实践">
 <meta property="og:url" content="http://yoursite.com/2019/02/20/阿里推送和-react-native-aliyun-push-的实践/index.html">
 <meta property="og:site_name" content="绚烂的蛋炒饭">
-<meta property="og:description" content="这次做 app 的推送功能，用的是阿里云的推动。github 上找到了 react-native-aliyun-push 这个组件，看了一下功能都能满足。根据文档，很快就完成了接入。基本没有什么问题。需要注意的大概有三点。  iOS 上 deviceToken 注册失败，返回 1Code=3000 &amp;quot;未找到应用程序的“aps-environment”的授权字符串&amp;quot;   这是 X">
+<meta property="og:description" content="这次做 app 的推送功能，用的是阿里云的推动。github 上找到了 react-native-aliyun-push 这个组件，看了一下功能都能满足。根据文档，很快就完成了接入。基本没有什么问题。需要注意的大概有四点。  iOS 上 deviceToken 注册失败，返回 1Code=3000 &amp;quot;未找到应用程序的“aps-environment”的授权字符串&amp;quot;   这是 X">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/02/27/kTPn1A.jpg">
 <meta property="og:image" content="https://s2.ax1x.com/2019/02/27/kTPhB6.png">
-<meta property="og:updated_time" content="2019-02-27T06:09:05.000Z">
+<meta property="og:updated_time" content="2019-02-27T09:49:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="阿里推送和 react-native-aliyun-push 的实践">
-<meta name="twitter:description" content="这次做 app 的推送功能，用的是阿里云的推动。github 上找到了 react-native-aliyun-push 这个组件，看了一下功能都能满足。根据文档，很快就完成了接入。基本没有什么问题。需要注意的大概有三点。  iOS 上 deviceToken 注册失败，返回 1Code=3000 &amp;quot;未找到应用程序的“aps-environment”的授权字符串&amp;quot;   这是 X">
+<meta name="twitter:description" content="这次做 app 的推送功能，用的是阿里云的推动。github 上找到了 react-native-aliyun-push 这个组件，看了一下功能都能满足。根据文档，很快就完成了接入。基本没有什么问题。需要注意的大概有四点。  iOS 上 deviceToken 注册失败，返回 1Code=3000 &amp;quot;未找到应用程序的“aps-environment”的授权字符串&amp;quot;   这是 X">
 <meta name="twitter:image" content="https://s2.ax1x.com/2019/02/27/kTPn1A.jpg">
 
 
@@ -345,7 +345,7 @@
       
 
       
-        <p>这次做 app 的推送功能，用的是阿里云的推动。github 上找到了 react-native-aliyun-push 这个组件，看了一下功能都能满足。根据文档，很快就完成了接入。基本没有什么问题。需要注意的大概有三点。</p>
+        <p>这次做 app 的推送功能，用的是阿里云的推动。github 上找到了 react-native-aliyun-push 这个组件，看了一下功能都能满足。根据文档，很快就完成了接入。基本没有什么问题。需要注意的大概有四点。</p>
 <ol>
 <li>iOS 上 deviceToken 注册失败，返回 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Code=3000 &quot;未找到应用程序的“aps-environment”的授权字符串&quot;</span><br></pre></td></tr></table></figure>
 </li>
@@ -353,6 +353,8 @@
 <p>这是 Xcode 里面有一个开关没打开造成的，如图<img src="https://s2.ax1x.com/2019/02/27/kTPn1A.jpg" alt="image"></p>
 <ol start="2">
 <li><p>iOS 上如果应用同时继承了支付宝支付，可能会报 UTDID 冲突，可以去支付宝平台 下载新的 SDK ，如图<img src="https://s2.ax1x.com/2019/02/27/kTPhB6.png" alt="image"></p>
+</li>
+<li><p>iOS 推送没打包有可能收不到推送，后台推送到 iOS 有一个参数 ApnsEnv，如果设置为 DEV 则没打包可以收到推送，如果是 PRODUCT 则需要打包才能收到推送；</p>
 </li>
 <li><p>Android8.0 以上设备需要配置 notificationChannel ，前端和后台要配置相同的 notificationChannel，阿里云移动推送的官方文档有提到，但是容易被忽略。如果发现 Android 设备收到消息有数据打印，但是没有弹出通知，有可能就是没有配置 notificatinoChannel ，也可能是后台推送的 type 是 message 而不是 notification。</p>
 </li>
